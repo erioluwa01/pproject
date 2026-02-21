@@ -5,7 +5,7 @@ import os
 
 os.makedirs(r"data\raw", exist_ok=True)
 
-input_file = r"data\raw\my_audio_rec001.m4a"
+input_file = r"data\raw\Recording (7).m4a"
 processed_file = r"data\raw\my_audio_resampled.wav"
 output_file = r"data\raw\my_audio_denoised.wav"
 
