@@ -1,18 +1,25 @@
+import os
 from src.preprocessing import preprocess_audio, save_audio
 from src.denoise import denoise
 from src.postprocessing import save_output
-import os
 
-os.makedirs(r"data\raw", exist_ok=True)
+DATA_DIR = os.path.join("data", "raw")
+INPUT_FILE = os.path.join(DATA_DIR, "Recording (7).m4a")
+PROCESSED_FILE = os.path.join(DATA_DIR, "my_audio_resampled.wav")
+OUTPUT_FILE = os.path.join(DATA_DIR, "my_audio_denoised.wav")
 
-input_file = r"data\raw\Recording (7).m4a"
-processed_file = r"data\raw\my_audio_resampled.wav"
-output_file = r"data\raw\my_audio_denoised.wav"
 
-audio, sr = preprocess_audio(input_file)
-save_audio(audio, processed_file, sr)
+def main():
+    os.makedirs(DATA_DIR, exist_ok=True)
 
-denoised_audio = denoise(audio)
-save_output(denoised_audio, output_file, sr)
+    audio, sr = preprocess_audio(INPUT_FILE)
+    save_audio(audio, PROCESSED_FILE, sr)
 
-print(f"Denoised audio saved to {output_file}")
+    denoised_audio = denoise(audio, sample_rate=sr)
+    save_output(denoised_audio, OUTPUT_FILE, sr)
+
+    print(f"Denoised audio saved to {OUTPUT_FILE}")
+
+
+if __name__ == "__main__":
+    main()
