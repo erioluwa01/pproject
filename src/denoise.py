@@ -3,7 +3,7 @@ import numpy as np
 from denoiser import pretrained
 import yaml
 
-with open("config.yaml", "r") as f:
+with open("config.yml", "r") as f:
     _cfg = yaml.safe_load(f)
 
 SAMPLE_RATE = _cfg["sample_rate"]
@@ -59,7 +59,6 @@ class AudioDenoiser:
             start += step
 
         return np.where(weights > 1e-8, denoised / weights, denoised)
-
 
 def denoise(audio: np.ndarray, sample_rate: int = SAMPLE_RATE) -> np.ndarray:
     if sample_rate != SAMPLE_RATE:
