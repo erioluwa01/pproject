@@ -10,3 +10,4 @@ torchaudio
 torch
 scipy
 librosa
+streamlit
